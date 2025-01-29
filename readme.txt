@@ -40,4 +40,38 @@ tarea: views y urls para el nuevo modelo
 	path('<int:id>', vista_producto)
 5. se verifica el funcionamiento de 
 	http://127.0.0.1:8000/productos/1
-	
+
+
+Creación de la Aplicación 'Products' con Formularios en Django
+--------------------------------------------------------------
+1. crear forms.py en <app_folder>/
+2. crear un formulario para el modelo Producto, en forma de clase, y se le dan los mismos atributos que al modelo (ver)
+3. crear metodo .guardar() en el formulario (ver)
+4. crear vista (ver 2 atributos) para el formulario, y url para la vista. Crear un html con una linea de texto simple (ver)
+5. verificar url /productos/agregar
+6. para renderizar el formulario en la vista, basta agregar al html
+	{{ form.as_p }}
+7. volver a verificar url /productos/agregar, se ve el formulario, el cual al inspeccionarlo tiene los campos del formulario dentro de etiquetas <p>
+8. agregar boton de tipo -submit- al html
+	<button type="submit">Agregar</button>
+9. volver a verificar url /productos/agregar, se ve el boton. El html hasta este momento solo tiene 3 lineas
+	Aca aparecera el formulario para agregar un producto
+	{{ form.as_p }}
+	<button type="submit">Agregar</button>
+10. poner "accion" al formulario en el html, por medio del nombre asignado a la url. Al mismo tiempo, la accion debe tener el metodo "post" (ver html)
+11. al intentar agregar un producto a traves del formulario del html, se tiene un error Forbidden 403
+	CSRF verification failed. Request aborted.
+12. agregar tag al html con csrf_token 
+	{% csrf_token %}
+13. al intentar de nuevo agregar el producto en html, nuevo error
+	No URL to redirect to. Provide a success_url.
+14. agregar nuevo atributo -success_url- a la vista (ver)
+15. al intentar de nuevo agregar el producto en html, funciona, pero para que el producto se agregue efectivamente a la db es necesario usar el metodo .guardar() en la vista (ver)
+16. la vista hasta ahora tenia 3 lineas de 3 atributos. Se le agregan las siguientes 3: 
+    def form_valid(self, form):
+        form.guardar()
+        return super().form_valid(form)
+17. se verifica en la dbshell como existe el nuevo producto
+
+tarea: agregar producto con foto, y hacer que el success_url lleve a un listado de productos
+'''''

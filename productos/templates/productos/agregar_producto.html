@@ -1,0 +1,7 @@
+Aca aparecera el formulario para agregar un producto
+
+<form action="{% url 'url_name_agregar_producto' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Agregar</button>
+</form>
