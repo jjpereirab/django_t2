@@ -75,3 +75,5 @@ Creación de la Aplicación 'Products' con Formularios en Django
 
 tarea: agregar producto con foto, y hacer que el success_url lleve a un listado de productos
 '''''
+a. se crean vistas de clase cbv y funcion fbv para listar los productos en un template. Se crea html, se agregan urls
+b. nuevos html, view y url cumplen el mismo objetivo que a. pero el html acomoda en una tabla y tiene el atributo "foto". Como poner la foto? 

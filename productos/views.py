@@ -23,13 +23,20 @@ class VistaFormularioProducto(generic.FormView):
         return super().form_valid(form)
 
 # clase 19, tarea
-from django.views.generic import ListView
-class VistaListaProductos(ListView):
-    model = Producto  # Specify the model
-    template_name = 'productos/lista_productos.html'  # Specify the template
-    context_object_name = 'items'  # Name for the context variable
+# ---------------
+# forma 1
+class VistaListaProductos(generic.ListView):
+    model = Producto  
+    template_name = 'productos/lista_productos.html'
+    context_object_name = 'items'  
 
+# forma 2
 from django.shortcuts import render
 def lista_productos(request):
-    items = Producto.objects.all()  # Fetch all entries from the Item model
+    items = Producto.objects.all()  
     return render(request, 'productos/lista_productos.html', {'items': items})
+
+class VistaListaProductosTabla(generic.ListView):
+    model = Producto  # Specify the model
+    template_name = 'productos/lista_productos_tabla.html'
+    context_object_name = 'items'
