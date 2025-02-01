@@ -15,6 +15,7 @@
                 <th>Descripcion</th>
                 <th>Precio</th>
                 <th>Foto</th>
+                <th>Fecha de creacion</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@
                             Sin foto disponible
                         {% endif %}
                     </td>
+                    <td>{{ item.creacion }}</td>
                 </tr>
             {% endfor %}
         </tbody>

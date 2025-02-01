@@ -114,3 +114,12 @@ con esto ya se muestra la imagen en la url (*)
 	
 tarea: agregar campo "fecha de creacion" al modelo Producto, mostrar en listado y admin
 '''''
+1. agregar atributo al modelo
+	creacion = models.DateTimeField(auto_now_add=True, verbose_name="creacion")
+2. makemigrations y migrate
+3. modificar la tabla en el html (*) y la clase en admin.py
+	list_display = ['nombre', 'precio', "disponible", "creacion"]  
+	readonly_fields = ('creacion',) 
+el atributo -readonly_fields- es una tupla, y es necesario para ver el campo dentro del admin en /change/
+
+
