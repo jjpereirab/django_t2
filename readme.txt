@@ -42,7 +42,7 @@ tarea: views y urls para el nuevo modelo
 	http://127.0.0.1:8000/productos/1
 
 
-Creación de la Aplicación 'Products' con Formularios en Django
+Clase 19 - Creación de la Aplicación 'Products' con Formularios en Django
 --------------------------------------------------------------
 1. crear forms.py en <app_folder>/
 2. crear un formulario para el modelo Producto, en forma de clase, y se le dan los mismos atributos que al modelo (ver)
@@ -77,3 +77,40 @@ tarea: agregar producto con foto, y hacer que el success_url lleve a un listado 
 '''''
 a. se crean vistas de clase cbv y funcion fbv para listar los productos en un template. Se crea html, se agregan urls
 b. nuevos html, view y url cumplen el mismo objetivo que a. pero el html acomoda en una tabla y tiene el atributo "foto". Como poner la foto? 
+
+
+Clase 20 - Integracion de TailwindCSS en Django
+-----------------------------------------------
+Se muestra como hacer la anterior tarea con herramientas de html para una vista tipo marketplace del listado de productos. Aun sin mostrar como administrar imagenes en el proyecto
+
+
+Clase 21 - Django Admin
+-----------------------
+- introduccion al admin
+- modelos en el admin
+- static() en urls para administracion de imagenes
+
+1. crear superuser para el admin de django
+	./manage.py create superuser
+2. ya se puede acceder desde http://127.0.0.1:8000/admin/
+3. crear clase en <app-folder>/admin.py para agregar los modelos al admin. Basta con las siguientes lineas para ver "Productos" en el admin
+	from .models import Producto
+	class ProductoAdmin(admin.ModelAdmin):
+	    modelo = Producto
+	admin.site.register(Producto, ProductoAdmin)
+4. para agregar campos al modelo en admin, poner el siguiente atributo en la clase
+	list_display = ['nombre', 'precio', "disponible"]
+5. para agregar campos de busqueda
+	search_fields = ['nombre', 'precio']
+6. se prueba poner imagen a un producto en el admin, lo cual crea automaticamente la carpeta
+	<project-folder>/logos
+dentro de esta carpeta está la imagen subida. La url (*) ahora muestra un "link roto" a la imagen
+	http://127.0.0.1:8000/productos/lista_cbv_tabla
+7. en <project-folder>/urls.py agregar
+	from django.conf.urls.static import static
+	from django.conf import settings
+	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+con esto ya se muestra la imagen en la url (*)
+	
+tarea: agregar campo "fecha de creacion" al modelo Producto, mostrar en listado y admin
+'''''
