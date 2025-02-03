@@ -123,3 +123,35 @@ tarea: agregar campo "fecha de creacion" al modelo Producto, mostrar en listado 
 el atributo -readonly_fields- es una tupla, y es necesario para ver el campo dentro del admin en /change/
 
 
+Clase 22 - Manejo de Sesiones en Django
+---------------------------------------
+- administracion de usuarios
+- bastante estilo para html (no implementado) 
+
+1. crear nueva aplicacion
+	./manage.py startapp usuarios
+2. agregar a INSTALLED_APPS en settings.py
+3. crear usuarios/templates/usuarios/login.html
+4. crear usuarios/urls.py y poner alli unas urls asociadas a views built-in en django para usuarios (ver)
+	from django.contrib.auth.views import LoginView
+	urlpatterns = [
+    		path('login/', LoginView.as_view(template_name='usuarios/login.html'), name='login'),
+	]
+5. en urlpatterns de <project_folder>/urls.py poner 
+	path("usuarios/", include("usuarios.urls"))
+6. la url ya funciona. Poner lo siguiente en el html mostrara un formulario de login
+	<form action="" >
+	    {{ form.as_p }}
+	    <button type="submit">Loguearse</button>
+	</form>
+5. para que funcione el login, el html debe ser
+	<form action="" method="POST">
+	    {% csrf_token %}
+	    {{ form.as_p }}
+	    <button type="submit">Loguearse</button>
+	</form>
+y agregar en <project_folder>/settings.py al final
+	LOGIN_REDIRECT_URL = "url_name_lista_productos_cbv_tabla"
+donde se usa el "name" de la url a la que se desea llegar luego del login
+
+
