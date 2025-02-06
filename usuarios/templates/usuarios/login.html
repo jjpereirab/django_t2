@@ -1,7 +1,15 @@
-Aca aparecerá el formulario de login
+Formulario de login
 
 <form action="" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Loguearse</button>
+    <button type="submit">Entrar</button>
 </form>
+
+<footer>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/about/">About</a>
+    </nav>        
+    <p>&copy; 2025 Coffee Shop de Jonnatan</p>
+</footer>

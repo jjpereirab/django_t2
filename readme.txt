@@ -154,4 +154,26 @@ y agregar en <project_folder>/settings.py al final
 	LOGIN_REDIRECT_URL = "url_name_lista_productos_cbv_tabla"
 donde se usa el "name" de la url a la que se desea llegar luego del login
 
+tarea: implementar LogoutView
+'''''
+la implementacion de LogoutView consiste en crear una url que ejecule la accion, no necesariamente requiere un template (html). La opcion de deslogueo puede ser mostrada siempre que el usuario este logueado i.e. user.is_authenticated = True
 
+1. en usuarios/urls.py, importar LogoutView desde el mismo origen de LoginView y crear url de logout
+	path('logout/', LogoutView.as_view(), name='logout')
+2. crear <main_folder>/templates/base.html y agregar BASE_DIR / "templates" a TEMPLATES/DIRS en settings.py (ver html, ver settings)
+3. en particular, /templates/base.html tiene en su header
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                Hola, {{ user.username }}! <button type="submit"> Log out </button>
+            </form>               
+        {% else %}
+            Hola, anónimo! <a href="/usuarios/login/"> <button type="submit"> Loguearse </button> </a>
+        {% endif %}
+las condiciones de logueo y deslogueo segun user.is_authenticated
+
+extra:
+1. se estableció /templates/base.html como home, agregando a //urls.py
+	path("", TemplateView.as_view(template_name='base.html'), name='base'),
+2. se extendio el layout desde base.html para /productos/lista_cbv_tabla
+3. algunas modificaciones de estilo en .../usuarios/login.html

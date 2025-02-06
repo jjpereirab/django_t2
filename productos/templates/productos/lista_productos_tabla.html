@@ -1,4 +1,49 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}Lista de productos{% endblock %}
+
+{% block content %}
+<h1>Lista de productos</h1>
+    
+    {% if items %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Foto</th>
+                <th>Fecha de creacion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.descripcion }}</td>
+                    <td>{{ item.precio }}</td>
+                    <td>
+                        {% if item.foto %}
+                            <img src="{{ item.foto.url }}" alt="{{ item.nombre }}" width="100">
+                        {% else %}
+                            Sin foto disponible
+                        {% endif %}
+                    </td>
+                    <td>{{ item.creacion }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No items found.</p>
+    {% endif %}
+
+    <p>  </p>
+
+{% endblock %}
+
+
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,5 +84,13 @@
     {% else %}
         <p>No items found.</p>
     {% endif %}
+
+    <footer>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/about/">About</a>
+        </nav>        
+        <p>&copy; 2025 Coffee Shop de Jonnatan</p>
+    </footer>    
 </body>
-</html>
+</html> {% endcomment %}

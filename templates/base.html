@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Coffee Shop{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Mi Coffee Shop!</h1>
+
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                Hola, {{ user.username }}! <button type="submit"> Log out </button>
+            </form>               
+        {% else %}
+            Hola, anónimo! <a href="/usuarios/login/"> <button type="submit"> Loguearse </button> </a>
+        {% endif %}
+     
+    </header>
+    <main>
+        {% block content %}
+        <p>Bienvenido a mi Coffee Shop!</p>
+        {% endblock %}
+    </main>
+    <footer>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/about/">About</a>
+        </nav>        
+        <p>&copy; 2025 Coffee Shop de Jonnatan</p>
+    </footer>
+</body>
+</html>
