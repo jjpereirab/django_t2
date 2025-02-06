@@ -1,0 +1,15 @@
+Formulario de registro
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registrarse</button>
+</form>
+
+<footer>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/about/">About</a>
+    </nav>        
+    <p>&copy; 2025 Coffee Shop de Jonnatan</p>
+</footer>

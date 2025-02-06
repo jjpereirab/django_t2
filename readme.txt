@@ -177,3 +177,19 @@ extra:
 	path("", TemplateView.as_view(template_name='base.html'), name='base'),
 2. se extendio el layout desde base.html para /productos/lista_cbv_tabla
 3. algunas modificaciones de estilo en .../usuarios/login.html
+
+
+Clase 23 - Manejo de Órdenes en CoffeeShop
+------------------------------------------
+- implementacion de formulario de Registro
+
+1. crear /usuarios/registro.html, sencillo, practicamente mismo contenido que login.html (ver)
+2. crear su respectiva vista en /usuarios/views.py
+	class VistaRegistro(generic.CreateView):
+	    form_class = UserCreationForm
+	    template_name = 'usuarios/registro.html'
+	    success_url = reverse_lazy('login')
+3. crear su respectiva url en /usuarios/urls.py
+	path('registro/', VistaRegistro.as_view(), name='registro'),
+4. modificacion de header en base.html para incluir la nueva accion de Registro 
+5. cambio de idioma en settings.py, se nota en los formularios de Login y Registro

@@ -15,7 +15,6 @@ def vista_producto(request, *args, **kwargs):
 class VistaFormularioProducto(generic.FormView):
     template_name = "productos/agregar_producto.html"   # <--- SE TIENE QUE LLAMAR template_name
     form_class = FormularioProducto                     # <--- SE TIENE QUE LLAMAR form_class
-    # success_url = reverse_lazy('url_name_agregar_producto') # <--- SE TIENE QUE LLAMAR success_url
     success_url = reverse_lazy('url_name_lista_productos_cbv') # <--- SE TIENE QUE LLAMAR success_url, **tarea**
 
     def form_valid(self, form):
