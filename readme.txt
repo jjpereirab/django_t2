@@ -1,4 +1,5 @@
-Curso de Django, main repo https://github.com/jjpereirab/django_t1
+Curso de Django, main repo personal https://github.com/jjpereirab/django_t1
+Repositorio del proyecto del curso https://github.com/platzi/django/tree/main
 
 Clase 16 - Configuración del Proyectos en Django
 ------------------------------------------------
@@ -181,8 +182,9 @@ extra:
 
 Clase 23 - Manejo de Órdenes en CoffeeShop
 ------------------------------------------
-- implementacion de formulario de Registro
 
+Parte1 implementacion de formulario de Registro
+''''''
 1. crear /usuarios/registro.html, sencillo, practicamente mismo contenido que login.html (ver)
 2. crear su respectiva vista en /usuarios/views.py
 	class VistaRegistro(generic.CreateView):
@@ -193,3 +195,24 @@ Clase 23 - Manejo de Órdenes en CoffeeShop
 	path('registro/', VistaRegistro.as_view(), name='registro'),
 4. modificacion de header en base.html para incluir la nueva accion de Registro 
 5. cambio de idioma en settings.py, se nota en los formularios de Login y Registro
+
+Parte2 creacion de app para ordenes
+''''''
+1. ./manage.py startapp ordenes
+2. agregar app a settings; crear ordenes/urls.py y vincular con //urls.py
+3. crear modelo Orden (ver)
+4. crear modelo ProductoEnOrden (nuevo campo models.IntegerField()) (ver)
+5. makemigrations y migrate
+6. crear clase OrdenAdmin en ordenes/admin.py
+7. ya se pueden crear Ordenes desde el admin, pero viendo la UI de creación falta algo
+8. crear crear clase ProductoEnOrdenInLine en ordenes/admin.py (ver*****)
+	class ProductoEnOrdenInLine(admin.TabularInline):
+	    model = ProductoEnOrden
+	    extra = 0
+9. agregar esta clase como atributo "inlines" en la clase OrdenAdmin
+	inlines = [ProductoEnOrdenInLine] 
+10. ahora se pueden crear ordenes agregando ProductoEnOrden en el admin
+
+
+
+

@@ -26,6 +26,8 @@ urlpatterns = [
     path("usuarios/", include("usuarios.urls")),
     # clase 22, tarea
     path("", TemplateView.as_view(template_name='base.html'), name='base'),
+    # clase 23
+    path("ordenes/", include("ordenes.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
