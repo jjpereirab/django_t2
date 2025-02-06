@@ -1,3 +1,12 @@
 from django.shortcuts import render
+from django.views.generic import DetailView
+from .models import Orden
 
 # Create your views here.
+class VistaMiOrden(DetailView):
+    model = Orden # <---- se tiene que llamar 'model', ver https://ccbv.co.uk/projects/Django/5.0/django.views.generic.detail/DetailView/
+    template_name = "ordenes/mi_orden.html"
+    context_object_name = "ordencilla" # <---- vinculo con el template
+
+    def get_object(self, queryset=None):
+        return Orden.objects.filter(activa=True).first()

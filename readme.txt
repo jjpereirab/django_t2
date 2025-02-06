@@ -214,5 +214,34 @@ Parte2 creacion de app para ordenes
 10. ahora se pueden crear ordenes agregando ProductoEnOrden en el admin
 
 
+Clase 24 - Manejo de Pedidos en CoffeeShop
+------------------------------------------
+- recurso de documentacion https://ccbv.co.uk/
+- objetivo: ver el contenido de la orden en un template
+
+1. crear nuevo usuario de test en /usuarios/registro.html
+2. crear Orden asociada a usuario en el admin
+3. crear view VistaMiOrden (ver***), agregar su respectiva url y crear su template html. La vista
+	class VistaMiOrden(DetailView):
+	    model = Orden 
+	    template_name = "ordenes/mi_orden.html"
+	    context_object_name = "ordencilla" # <---- vinculo con el template
+	    def get_object(self, queryset=None):
+		return Orden.objects.filter(activa=True)
+get_object() es un método inherente de DetailView. Aquí se está redefiniendo a conveniencia (ver recurso)	
+4. el template
+	Esta es la orden
+	{{ ordencilla.usuario.username }}
+	{{ ordencilla.creacion }}
+5. la url /ordenes/mi_orden.html no muestra la informacion de la orden. Para ver debugging info. Se puede agregar
+	{{ debug }} o {{ debug ordencilla }} 
+6. el metodo get_object() en la vista requeria la siguiente modificacion
+	return Orden.objects.filter(activa=True).first()
+7. nuevas entradas al template, tales que muestran los ProductosEnOrden dentro de Orden, por ejemplo (ver*****)
+	{% for prod_ord in ordencilla.productoenorden_set.all %}
+	    {{ prod_ord.producto.nombre }}
+	{% endfor %}
+8. la url /ordenes/mi_orden.html ahora muestra la informacion de la orden, notar que esto solo se deberia mostrar al usuario autenticado asociado a la orden 
+
 
 
