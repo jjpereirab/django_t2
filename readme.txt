@@ -244,4 +244,22 @@ get_object() es un método inherente de DetailView. Aquí se está redefiniendo 
 8. la url /ordenes/mi_orden.html ahora muestra la informacion de la orden, notar que esto solo se deberia mostrar al usuario autenticado asociado a la orden 
 
 
+Clase 25 - Mixings en vistas basadas en clases
+----------------------------------------------
+
+- para arreglar el problema de autenticacion planteado (24-8), se agrega el filtro "usuario=self.request.user" al retorno del metodo get_object() asi
+	return Orden.objects.filter(activa=True, usuario=self.request.user).first()
+esto basta para dejar de mostrarle a otros usuarios la orden, pero si no hay nadie logueado aparece un error
+
+- para solucionar el error, la vista VistaMiOrden debe heredar tambien LoginRequiredMixin
+	from django.contrib.auth.mixins import LoginRequiredMixin
+	class VistaMiOrden(LoginRequiredMixin, DetailView):
+		...
+ademas se debe poner la siguiente variable en settings, con el nombre de la url de logueo
+	LOGIN_URL = "login"
+esto hará que el usuario intentando acceder a la url que requiere autenticacion, sea redireccionado a la url de login para luego de loguearse poder llegar a la url inicial
+
+- el template /ordenes/mi_orden.html tiene varias modificaciones usando tags (ver****)
+
+
 

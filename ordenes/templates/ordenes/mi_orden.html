@@ -1,21 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-Esta es la orden
 
-{{ ordencilla.usuario.username }} <br>
-{{ ordencilla.creacion }} <br>
-{{ ordencilla.creacion | date }}  <br><br>
+<h3> Mis ordenes </h3>
+{% if ordencilla %}
+    Esta es tu orden: <br>
+    {{ ordencilla.usuario.username }} <br>
+    {{ ordencilla.creacion }} <br>
+    {{ ordencilla.creacion | date }}  <br><br>
 
-{% comment %} {% debug ordencilla %} {% endcomment %}
+    Tu orden contiene los siguiente productos: <br>
+    {% for prod_ord in ordencilla.productoenorden_set.all %}
+        {{ prod_ord.producto.nombre }} -
+        {{ prod_ord.producto.precio }} -
+        {{ prod_ord.cantidad }} <br>
+        {% empty %}
+            <br><br>Existe la orden pero no hay productos en ella
+    {% endfor %}    
 
-{% for prod_ord in ordencilla.productoenorden_set.all %}
-    {{ prod_ord.producto.nombre }} -
-    {{ prod_ord.producto.precio }} -
-    {{ prod_ord.cantidad }} <br>
+    {% else %}
+    No tienes ordenes
+{% endif %}
 
-{% empty %}
-    <br><br>No hay productos en la orden
-{% endfor %}
-
+{% comment %} {% debug ordencilla %} {% endcomment %} 
+ 
 {% endblock content %}

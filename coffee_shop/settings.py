@@ -128,3 +128,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "url_name_lista_productos_cbv_tabla"
 
 LOGOUT_REDIRECT_URL = '/' # clase 22, tarea
+
+LOGIN_URL = "login" # clase 25
