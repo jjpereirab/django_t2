@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Orden
-
+from .forms import FormularioProductoEnOrden
+from django.urls import reverse_lazy
 
 # Create your views here.
 class VistaMiOrden(LoginRequiredMixin, DetailView):
@@ -13,3 +13,16 @@ class VistaMiOrden(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         return Orden.objects.filter(activa=True, usuario=self.request.user).first()
         # return Orden.objects.filter(activa=True).first()
+
+# clase 26
+class VistaCrearProductoEnOrden(LoginRequiredMixin, CreateView):
+    template_name = "ordenes/crear_producto_en_orden.html"
+    form_class = FormularioProductoEnOrden
+    success_url = reverse_lazy('orden-list')
+
+    def form_valid(self, form): # ver https://ccbv.co.uk/projects/Django/5.0/django.views.generic.edit/CreateView/
+        orden, creada = Orden.objects.get_or_create(activa=True, usuario=self.request.user, )
+        form.instance.orden = orden
+        form.instance.cantidad = 1
+        form.save()
+        return super().form_valid(form)

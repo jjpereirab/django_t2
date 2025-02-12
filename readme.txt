@@ -262,4 +262,22 @@ esto hará que el usuario intentando acceder a la url que requiere autenticacion
 - el template /ordenes/mi_orden.html tiene varias modificaciones usando tags (ver****)
 
 
+Clase 26 - Agregar productos a la orden
+---------------------------------------
+- nuevo argumento CreateView de django.views.generic https://ccbv.co.uk/projects/Django/5.0/django.views.generic.edit/CreateView/
+- nuevo formulario ModelForm de django.forms
 
+1. crear vista VistaCrearProductoEnOrden(CreateView), con su respectivo html y url
+2. crear un formulario para la vista, entonces hacer ordenes/forms.py y alli la clase FormularioProductoEnOrden(ModelForm) (ver***)
+3. ya se puede definir el formulario dentro de la vista
+4. la vista tambien require success_url, poner la url del detalle de la orden "orden-list"
+5. en la vista, redefinir el metodo form_valid() de CreateView. La idea es crear una Orden al CrearProductoEnOrden
+6. usar el LoginRequiredMixin en la vista, para el tema de autenticacion
+7. importante ver como queda al final la vista VistaCrearProductoEnOrden (ver****************)
+8. crear boton para agregar producto en la tabla de productos/lista_productos_tabla.html
+
+Nota: ========== IMPORTANTE ==========
+''''
+ver que el -name- del <input> en lista_productos_tabla.html sea el mismo que el campo dentro de "fields" en forms.py. Esto inplica que el valor de -name- sea el mismo en los otros lugares donde se usa en el mismo html
+
+9. por lo anterior, ver los cambios en lista_productos_tabla.html de cerca (ver****)

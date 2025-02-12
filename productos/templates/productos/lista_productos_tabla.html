@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Lista de productos{% endblock %}
+{% block title %}Lista de items{% endblock %}
 
 {% block content %}
-<h1>Lista de productos</h1>
+<h1>Lista de items</h1>
     
-    {% if items %}
+    {% if items %}  {% comment %} items esta en items/views.py {% endcomment %}
     <table border="1">
         <thead>
             <tr>
@@ -14,22 +14,30 @@
                 <th>Precio</th>
                 <th>Foto</th>
                 <th>Fecha de creacion</th>
+                <th> </th>
             </tr>
         </thead>
         <tbody>
-            {% for item in items %}
+            {% for producto in items %} 
                 <tr>
-                    <td>{{ item.nombre }}</td>
-                    <td>{{ item.descripcion }}</td>
-                    <td>{{ item.precio }}</td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.descripcion }}</td>
+                    <td>{{ producto.precio }}</td>
                     <td>
-                        {% if item.foto %}
-                            <img src="{{ item.foto.url }}" alt="{{ item.nombre }}" width="100">
+                        {% if producto.foto %}
+                            <img src="{{ producto.foto.url }}" alt="{{ producto.nombre }}" width="100">
                         {% else %}
                             Sin foto disponible
                         {% endif %}
                     </td>
-                    <td>{{ item.creacion }}</td>
+                    <td>{{ producto.creacion }}</td>
+                    <td> 
+                        <form action="{% url "orden-add-product" %}" method="POST">
+                            {% csrf_token %}                            
+                            <input type="hidden" name="producto" value="{{ producto.id }}">
+                            <button>Agregar</button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
