@@ -1,8 +1,12 @@
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from .models import Producto
 from django.views import generic
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+from .models import Producto
 from .forms import FormularioProducto
+from .serializers import SerializerDeProducto
 
 # vista para reto de clase 18
 def vista_producto(request, *args, **kwargs):
@@ -35,7 +39,18 @@ def lista_productos(request):
     items = Producto.objects.all()  
     return render(request, 'productos/lista_productos.html', {'items': items})
 
+# Esta es la buena
 class VistaListaProductosTabla(generic.ListView):
     model = Producto  # Specify the model
     template_name = 'productos/lista_productos_tabla.html'
     context_object_name = 'items'
+
+# clase 27
+class VistaListaProductoAPI(APIView):
+    authentication_classes = []
+    permission_classes = []
+    
+    def get(self, request):
+        productos = Producto.objects.all()
+        serializador = SerializerDeProducto(productos, many=True)
+        return Response(serializador.data)

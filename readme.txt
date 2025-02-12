@@ -281,3 +281,25 @@ Nota: ========== IMPORTANTE ==========
 ver que el -name- del <input> en lista_productos_tabla.html sea el mismo que el campo dentro de "fields" en forms.py. Esto inplica que el valor de -name- sea el mismo en los otros lugares donde se usa en el mismo html
 
 9. por lo anterior, ver los cambios en lista_productos_tabla.html de cerca (ver****)
+
+
+Clase 27 - Django REST Framework
+--------------------------------
+- pip install django-rest-framework https://www.django-rest-framework.org/
+- serializers: from rest_framework.serializers import ModelSerializer
+- views: from rest_framework.views import APIView
+- views: from rest_framework.response import Response
+
+1. instalar django rest framework, y agregar a requirements.txt
+2. agregar "rest_framework" en INSTALLED_APPS en settings
+3. agregar en settings tambien la configuracion REST_FRAMEWORK que está en la documentacion
+	REST_FRAMEWORK = { 'DEFAULT_PERMISSION_CLASSES': [
+		'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly' ] }
+4. crear productos/serializers.py (ver***)
+5. crear vista en productos/views.py VistaListaProductoAPI. Varios imports necesarios para definiciones dentro de esta clase, ademas de unos atributos de permisos y autenticacion (ver*****).
+6. crear path en productos/urls.py y verificar el funcionamiento
+	http://127.0.0.1:8000/productos/api
+
+tarea: endpoints para agregar productos y crear una orden
+'''''
+

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import vista_producto, VistaFormularioProducto, VistaListaProductos, lista_productos, VistaListaProductosTabla
+from .views import vista_producto, VistaFormularioProducto, VistaListaProductos, lista_productos, VistaListaProductosTabla, VistaListaProductoAPI
 
 
 urlpatterns = [ # todas estas urls llevan /productos/ al inicio
@@ -10,5 +10,7 @@ urlpatterns = [ # todas estas urls llevan /productos/ al inicio
     # clase 19, tarea
     path('lista_cbv', VistaListaProductos.as_view(), name='url_name_lista_productos_cbv'),  # forma 1
     path('lista_fbv', lista_productos, name='url_name_lista_productos_fbv'),                # forma 2
-    path('lista_cbv_tabla', VistaListaProductosTabla.as_view(), name='url_name_lista_productos_cbv_tabla'),  
+    path('lista_cbv_tabla', VistaListaProductosTabla.as_view(), name='url_name_lista_productos_cbv_tabla'), 
+    # clase 27
+    path('api', VistaListaProductoAPI.as_view(), name='url_productos_api'), 
 ]
