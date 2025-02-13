@@ -26,3 +26,20 @@ class VistaCrearProductoEnOrden(LoginRequiredMixin, CreateView):
         form.instance.cantidad = 1
         form.save()
         return super().form_valid(form)
+    
+
+# clase 27 - tarea
+from rest_framework.viewsets import ModelViewSet
+from .models import Orden
+from .serializers import SerializadorOrden, SerializadorCrearOrden
+
+class OrdenAPI(ModelViewSet):
+    authentication_classes = []
+    permission_classes = []
+    
+    queryset = Orden.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == "create":
+            return SerializadorCrearOrden  # Usar el serializer con productos al crear
+        return SerializadorOrden  # Usar el serializer normal para leer

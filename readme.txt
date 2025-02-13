@@ -296,10 +296,18 @@ Clase 27 - Django REST Framework
 	REST_FRAMEWORK = { 'DEFAULT_PERMISSION_CLASSES': [
 		'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly' ] }
 4. crear productos/serializers.py (ver***)
-5. crear vista en productos/views.py VistaListaProductoAPI. Varios imports necesarios para definiciones dentro de esta clase, ademas de unos atributos de permisos y autenticacion (ver*****).
+5. crear vista en productos/views.py VistaListaProductoAPI(APIView). Varios imports necesarios para definiciones dentro de esta clase, ademas de unos atributos de permisos y autenticacion (ver*****).
 6. crear path en productos/urls.py y verificar el funcionamiento
 	http://127.0.0.1:8000/productos/api
 
 tarea: endpoints para agregar productos y crear una orden
 '''''
+1. CRUD API creada para Producto, clase ProductoAPI(viewsets.ModelViewSet). La url está en coffee_shop/urls.py. Se parece bastante a la clase ya creada VistaListaProductoAPI(APIView) y de hecho tienen el mismo serializer, pero tiene mas funciones
+	- ver productos/views.py
+	- ver coffee_shop/urls.py
+2. CRUD API creada para Orden, ligada a ProductoEnOrden. Asociadas a CrearOrden. Clase  OrdenAPI(ModelViewSet). Tres serializers, una sola vista 
+	- ver ordenes/serializers.py
+	- ver ordenes/views.py
+	- ver coffee_shop/urls.py
+
 

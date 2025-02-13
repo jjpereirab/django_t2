@@ -49,8 +49,18 @@ class VistaListaProductosTabla(generic.ListView):
 class VistaListaProductoAPI(APIView):
     authentication_classes = []
     permission_classes = []
-    
+
     def get(self, request):
         productos = Producto.objects.all()
         serializador = SerializerDeProducto(productos, many=True)
         return Response(serializador.data)
+    
+
+# tarea clase 27 - vista para CRUD de Producto
+from rest_framework import viewsets
+class ProductoAPI(viewsets.ModelViewSet):
+    authentication_classes = []
+    permission_classes = []
+        
+    queryset = Producto.objects.all()
+    serializer_class = SerializerDeProducto

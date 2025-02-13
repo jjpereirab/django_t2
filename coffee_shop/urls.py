@@ -30,4 +30,14 @@ urlpatterns = [
     path("ordenes/", include("ordenes.urls")),
 ]
 
+# clase 27 - tarea
+from rest_framework.routers import SimpleRouter
+from productos.views import ProductoAPI
+from ordenes.views import OrdenAPI
+router = SimpleRouter()
+router.register(r'api/prod', ProductoAPI, basename='producto-api')
+router.register(r'api/ord', OrdenAPI, basename='orden-api')
+urlpatterns += router.urls
+
+# para imagenes
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
