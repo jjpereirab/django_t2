@@ -329,4 +329,28 @@ Nota:
 El resto de la clase consiste en crear una base de datos en AWS y usarla, poniendo mas variables dentro de DATABASES
 
 
+Clase 29 - Variables de entorno en Django
+-----------------------------------------
+- pip install django-environ
+1. actualizar requirements.txt
+2. en settings.py
+	import environ # clase 29
+	import os
+	env = environ.Env()
+	environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+3. crear archivo .env y poner en él por ejemplo
+	DB_NAME="pg_local"
+4. en DATABASES de settings 
+        'NAME': env.str("DB_NAME"),
+5. se verifica funcionamiento
+
+Nota:
+''''
+Tambien se puede crear la variable de entorno DJANGO_DB_URL que debe tener la estructura
+	DJANGO_DB_URL="postgres://USER:PASSWORD@HOST:PORT/NAME"
+donde USER, PASSWORD, HOST, PORT y NAME son variables dentro del diccionario en DATABASES, y de esta forma solo haria falta definir esta variable en .env y poner en settings
+	DATABASES = {
+		"default": env.db("DJANGO_DB_URL")
+	}
+
 
