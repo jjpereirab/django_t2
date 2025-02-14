@@ -311,3 +311,22 @@ tarea: endpoints para agregar productos y crear una orden
 	- ver coffee_shop/urls.py
 
 
+Clase 28 - Configurar PostgreSQL en AWS con Django
+--------------------------------------------------
+- tener postgres instalado
+- tener una db llamada "pg_local" creada
+
+1. en settings.py DATABASES
+	'ENGINE': 'django.db.backends.postgresql',
+	'NAME': "pg_local",
+2. verificar con ./manage.py dbshell, ocurre un error
+	pip install psycopg2-binary
+3. dependencia puesta en requirements.txt makemigrations y migrate
+4. verificacion de funcionamiento en nueva db
+
+Nota:
+''''
+El resto de la clase consiste en crear una base de datos en AWS y usarla, poniendo mas variables dentro de DATABASES
+
+
+
